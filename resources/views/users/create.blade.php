@@ -33,10 +33,10 @@
         <div class="form-group mb-3">
             <label>Rol</label>
             <select name="role" class="form-control @error('role') is-invalid @enderror" required>
-                <option value="admin">Admin</option>
-                <option value="employee" selected>Empleado</option>
+                
+                <option value="employee" selected>oficina</option>
                 <option value="editor" selected>Editor</option>
-                <option value="jefe" selected>jefe</option>
+                
             </select>
             @error('role')
                 <div class="invalid-feedback">{{ $message }}</div>

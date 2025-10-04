@@ -30,8 +30,8 @@
         <div class="form-group mb-3">
             <label>Rol</label>
             <select name="role" class="form-control @error('role') is-invalid @enderror" required>
-                <option value="admin" {{ $user->role === 'admin' ? 'selected' : '' }}>Admin</option>
-                <option value="employee" {{ $user->role === 'employee' ? 'selected' : '' }}>Employee</option>
+                <option value="admin" {{ $user->role === 'editor' ? 'selected' : '' }}>Editor</option>
+                <option value="employee" {{ $user->role === 'employee' ? 'selected' : '' }}>Oficina</option>
             </select>
             @error('role')
                 <div class="invalid-feedback">{{ $message }}</div>

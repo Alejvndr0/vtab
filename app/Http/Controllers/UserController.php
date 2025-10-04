@@ -15,10 +15,13 @@ class UserController extends Controller
     }
 
     public function index()
-    {
-        $users = User::paginate(10);
-        return view('users.index', compact('users'));
-    }
+{
+    // Trae todos los usuarios excepto los que tienen rol 'admin'
+    $users = User::where('role', '!=', 'admin')->paginate(10);
+
+    return view('users.index', compact('users'));
+}
+
 
     public function create()
     {

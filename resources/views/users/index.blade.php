@@ -14,7 +14,6 @@
             <tr>
                 <th>Nombre</th>
                 <th>Email</th>
-                <th>Rol</th>
                 <th>Acciones</th>
             </tr>
         </thead>
@@ -23,13 +22,13 @@
                 <tr>
                     <td>{{ $user->name }}</td>
                     <td>{{ $user->email }}</td>
-                    <td>{{ $user->role }}</td>
+                   
                     <td>
                         <a href="{{ route('users.edit', $user) }}" class="btn btn-sm btn-warning">Editar</a>
                         <form action="{{ route('users.destroy', $user) }}" method="POST" style="display:inline;">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('¿Seguro?')">Eliminar</button>
+                           
                         </form>
                     </td>
                 </tr>
