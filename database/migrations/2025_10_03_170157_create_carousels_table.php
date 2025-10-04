@@ -10,13 +10,14 @@ class CreateCarouselsTable extends Migration
     {
         Schema::create('carousels', function (Blueprint $table) {
             $table->id();
-            $table->string('image')->nullable(); // Path to the image
-            $table->string('title')->nullable(); // e.g., "VISAS TRAMITES Y ASESORIA BOLIVIA"
-            $table->string('subtitle')->nullable(); // e.g., "Descubramos el Mundo Juntos"
-            $table->string('button_text')->nullable(); // e.g., "Nuestros Servicios"
-            $table->string('button_link')->nullable(); // e.g., "/service"
-            $table->boolean('is_active')->default(true); // To toggle visibility
-            $table->integer('order')->default(0); // To control slide order
+            $table->string('image')->nullable(); // Path interno o nombre del archivo
+            $table->string('image_url')->nullable(); // ✅ URL completa (Render o local)
+            $table->string('title')->nullable(); // Ejemplo: "VISAS TRÁMITES Y ASESORÍA BOLIVIA"
+            $table->string('subtitle')->nullable(); // Ejemplo: "Descubramos el Mundo Juntos"
+            $table->string('button_text')->nullable(); // Ejemplo: "Nuestros Servicios"
+            $table->string('button_link')->nullable(); // Ejemplo: "/service"
+            $table->boolean('is_active')->default(true); // Mostrar o no el slide
+            $table->integer('order')->default(0); // Orden del carrusel
             $table->timestamps();
         });
     }

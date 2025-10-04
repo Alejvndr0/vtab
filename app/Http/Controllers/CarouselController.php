@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Models\Carousel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -23,7 +22,7 @@ class CarouselController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'image' => 'image|mimes:jpeg,png,jpg|max:2048',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
             'title' => 'nullable|string|max:255',
             'subtitle' => 'nullable|string|max:255',
             'button_text' => 'nullable|string|max:100',
@@ -33,11 +32,16 @@ class CarouselController extends Controller
         ]);
 
         if ($request->hasFile('image')) {
-            $validated['image'] = $request->file('image')->store('carousels', 'public');
+            // Guardar en storage/public/carousels
+            $path = $request->file('image')->store('carousels', 'public');
+            $validated['image'] = $path;
+
+            // ✅ Crear URL completa (Render o local)
+            $validated['image_url'] = asset('storage/' . $path);
         }
 
         Carousel::create($validated);
-        return redirect()->route('carousels.index')->with('success', 'Carousel creado.');
+        return redirect()->route('carousels.index')->with('success', 'Carousel creado correctamente.');
     }
 
     public function edit(Carousel $carousel)
@@ -58,14 +62,18 @@ class CarouselController extends Controller
         ]);
 
         if ($request->hasFile('image')) {
+            // Eliminar imagen anterior si existe
             if ($carousel->image) {
                 Storage::disk('public')->delete($carousel->image);
             }
-            $validated['image'] = $request->file('image')->store('carousels', 'public');
+
+            $path = $request->file('image')->store('carousels', 'public');
+            $validated['image'] = $path;
+            $validated['image_url'] = asset('storage/' . $path);
         }
 
         $carousel->update($validated);
-        return redirect()->route('carousels.index')->with('success', 'Carousel actualizado.');
+        return redirect()->route('carousels.index')->with('success', 'Carousel actualizado correctamente.');
     }
 
     public function destroy(Carousel $carousel)
@@ -73,7 +81,8 @@ class CarouselController extends Controller
         if ($carousel->image) {
             Storage::disk('public')->delete($carousel->image);
         }
+
         $carousel->delete();
-        return redirect()->route('carousels.index')->with('success', 'Carousel eliminado.');
+        return redirect()->route('carousels.index')->with('success', 'Carousel eliminado correctamente.');
     }
 }

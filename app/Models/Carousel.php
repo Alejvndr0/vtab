@@ -8,6 +8,7 @@ class Carousel extends Model
 {
     protected $fillable = [
         'image',
+        'image_url',
         'title',
         'subtitle',
         'button_text',
