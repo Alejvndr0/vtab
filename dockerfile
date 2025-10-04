@@ -21,12 +21,12 @@ WORKDIR /var/www
 
 COPY . .
 # Crea directorios y configura permisos
-RUN mkdir -p /var/www/storage/app/public \
+RUN mkdir -p /var/www/storage/app/public/carousels\
     && mkdir -p /var/www/public/img \
     && chown -R www-data:www-data /var/www \
     && chmod -R 755 /var/www/storage \
     && chmod -R 755 /var/www/public/img
-    
+
 RUN composer install --optimize-autoloader --no-dev \
     && npm install \
     && npm run build
