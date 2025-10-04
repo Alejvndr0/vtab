@@ -33,8 +33,6 @@ RUN mkdir -p /var/www/storage/app/public/IMG \
     && chmod -R 755 /var/www/public/IMG
 
 # Copia y configura el script de despliegue
-COPY ./scripts/00-laravel-deploy.sh /usr/local/bin/00-laravel-deploy.sh
-RUN chmod +x /usr/local/bin/00-laravel-deploy.sh
 
 EXPOSE 10000
 
