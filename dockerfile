@@ -25,9 +25,17 @@ RUN composer install --optimize-autoloader --no-dev \
     && npm install \
     && npm run build
 
-RUN chown -R www-data:www-data /var/www \
-    && chmod -R 755 /var/www/storage
+# Crea directorios y configura permisos
+RUN mkdir -p /var/www/storage/app/public/IMG \
+    && mkdir -p /var/www/public/IMG \
+    && chown -R www-data:www-data /var/www \
+    && chmod -R 755 /var/www/storage \
+    && chmod -R 755 /var/www/public/IMG
+
+# Copia y configura el script de despliegue
+COPY ./scripts/00-laravel-deploy.sh /usr/local/bin/00-laravel-deploy.sh
+RUN chmod +x /usr/local/bin/00-laravel-deploy.sh
 
 EXPOSE 10000
 
-CMD php artisan migrate --force  && ls -la /var/www/public/img && ls -la /var/www/public/storage && php artisan serve --host=0.0.0.0 --port=10000
+CMD /usr/local/bin/00-laravel-deploy.sh && php artisan serve --host=0.0.0.0 --port=$PORT
