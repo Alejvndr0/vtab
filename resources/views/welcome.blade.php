@@ -2,30 +2,48 @@
 
 @section('content')
    <!-- Carousel Start -->
-<div id="header-carousel" class="carousel slide" data-bs-ride="carousel">
-    <div class="carousel-inner">
-        @foreach ($carousels as $index => $carousel)
-            <div class="carousel-item {{ $index === 0 ? 'active' : '' }}">
-                <img src="{{ $carousel->image_url }}" class="d-block w-100" alt="Imagen del carrusel">
-                <div class="carousel-caption d-none d-md-block">
-                    <h5>{{ $carousel->title }}</h5>
-                    <p>{{ $carousel->description }}</p>
+<div class="container-fluid p-0">
+    <div id="header-carousel" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+
+            @foreach ($carousels as $index => $carousel)
+
+                <div class="carousel-item {{ $index === 0 ? 'active' : '' }}">
+                    <img class="w-100" src="{{ asset('storage/' . $carousel->image) }}" alt="Imagen">
+
+                    <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+                        <div class="p-3" style="max-width: 900px;">
+                            @if ($carousel->title)
+                                <h4 class="text-white text-uppercase mb-md-3">{{ $carousel->title }}</h4>
+                            @endif
+                            @if ($carousel->subtitle)
+                                <h1 class="display-3 text-white mb-md-4">{{ $carousel->subtitle }}</h1>
+                            @endif
+                            @if ($carousel->button_text && $carousel->button_link)
+                                <a href="{{ url($carousel->button_link) }}" class="btn btn-primary py-md-3 px-md-5 mt-2">
+                                    {{ $carousel->button_text }}
+                                </a>
+                            @endif
+                        </div>
+                    </div>
                 </div>
+            @endforeach
+
+        </div>
+
+        <!-- Controles -->
+        <a class="carousel-control-prev" href="#header-carousel" data-slide="prev">
+            <div class="btn btn-dark" style="width: 45px; height: 45px;">
+                <span class="carousel-control-prev-icon mb-n2"></span>
             </div>
-        @endforeach
+        </a>
+        <a class="carousel-control-next" href="#header-carousel" data-slide="next">
+            <div class="btn btn-dark" style="width: 45px; height: 45px;">
+                <span class="carousel-control-next-icon mb-n2"></span>
+            </div>
+        </a>
     </div>
-
-    <button class="carousel-control-prev" type="button" data-bs-target="#header-carousel" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Anterior</span>
-    </button>
-
-    <button class="carousel-control-next" type="button" data-bs-target="#header-carousel" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Siguiente</span>
-    </button>
 </div>
-
 <!-- Carousel End -->
 
     <!-- Carousel End -->
