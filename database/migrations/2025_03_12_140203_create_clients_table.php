@@ -23,7 +23,9 @@ class CreateClientsTable extends Migration
             $table->decimal('costo', 10, 2)->nullable();
             $table->string('numero_contrato')->nullable();
             $table->text('notes')->nullable();
+            $table->string('pdf')->nullable(); // <-- Aquí agregamos la columna
             $table->timestamps();
+
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }

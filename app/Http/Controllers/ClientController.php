@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Client;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ClientController extends Controller
 {
@@ -33,23 +34,17 @@ class ClientController extends Controller
             'birth_date' => 'nullable|date',
             'inicio_tramite' => 'nullable|date',
             'costo' => 'nullable|numeric',
+            'pdf' => 'nullable|file|mimes:pdf|max:10240', // máximo 10MB
         ]);
 
-        Client::create([
-            'user_id' => auth()->id(),
-            'full_name' => $request->full_name,
-            'email' => $request->email,
-            'phone' => $request->phone,
-            'phone2' => $request->phone2,
-            'address' => $request->address,
-            'birth_date' => $request->birth_date,
-            'inicio_tramite' => $request->inicio_tramite,
-            'tipo_tramite' => $request->tipo_tramite,
-            'destino' => $request->destino,
-            'costo' => $request->costo,
-            'numero_contrato' => $request->numero_contrato,
-            'notes' => $request->notes,
-        ]);
+        $data = $request->all();
+        $data['user_id'] = auth()->id();
+
+        if ($request->hasFile('pdf')) {
+            $data['pdf'] = $request->file('pdf')->store('pdfs', 'public');
+        }
+
+        Client::create($data);
 
         return redirect()->route('clients.index')->with('success', 'Cliente creado.');
     }
@@ -69,22 +64,20 @@ class ClientController extends Controller
             'birth_date' => 'nullable|date',
             'inicio_tramite' => 'nullable|date',
             'costo' => 'nullable|numeric',
+            'pdf' => 'nullable|file|mimes:pdf|max:10240',
         ]);
 
-        $client->update([
-            'full_name' => $request->full_name,
-            'email' => $request->email,
-            'phone' => $request->phone,
-            'phone2' => $request->phone2,
-            'address' => $request->address,
-            'birth_date' => $request->birth_date,
-            'inicio_tramite' => $request->inicio_tramite,
-            'tipo_tramite' => $request->tipo_tramite,
-            'destino' => $request->destino,
-            'costo' => $request->costo,
-            'numero_contrato' => $request->numero_contrato,
-            'notes' => $request->notes,
-        ]);
+        $data = $request->all();
+
+        if ($request->hasFile('pdf')) {
+            // Eliminar PDF anterior si existe
+            if ($client->pdf && Storage::disk('public')->exists($client->pdf)) {
+                Storage::disk('public')->delete($client->pdf);
+            }
+            $data['pdf'] = $request->file('pdf')->store('pdfs', 'public');
+        }
+
+        $client->update($data);
 
         return redirect()->route('clients.index')->with('success', 'Cliente actualizado.');
     }
@@ -92,6 +85,11 @@ class ClientController extends Controller
     public function destroy(Client $client)
     {
         if (auth()->user()->isAdmin()) {
+            // Eliminar PDF si existe
+            if ($client->pdf && Storage::disk('public')->exists($client->pdf)) {
+                Storage::disk('public')->delete($client->pdf);
+            }
+
             $client->delete();
             return redirect()->route('clients.index')->with('success', 'Cliente eliminado.');
         }
