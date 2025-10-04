@@ -5,7 +5,7 @@ services:
     dockerfilePath: ./Dockerfile
     envVars:
       - key: APP_KEY
-        value: base64:jH8yPSAy51+r8RsMovIEfdJseqEImvH4vjJ0XKNT8ao=
+        value: base64:agWQBv26jmlrjMErAKHywLt+bS7V2jXfrfBxH7Xau3k=
       - key: APP_ENV
         value: production
       - key: APP_DEBUG
@@ -13,12 +13,12 @@ services:
       - key: DB_CONNECTION
         value: pgsql
       - key: DB_HOST
-        value: dpg-cv8pk29u0jms739dqo2g-a
+        value: dpg-d3gjh02li9vc73f6f1u0-a
       - key: DB_PORT
         value: 5432
       - key: DB_DATABASE
-        value: visa_75ki
+        value: vtab
       - key: DB_USERNAME
-        value: visa_75ki_user
+        value: vtab_user
       - key: DB_PASSWORD
-        value: sZISmFF04ve8oDe8opuaXaBAnGMQ0PNy
+        value: 8UXY42slLrN3v6JrebsbFMTbAeD6sWfg
