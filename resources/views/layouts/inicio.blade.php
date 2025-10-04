@@ -54,26 +54,7 @@
                         <a class="text-primary px-3" href="https://www.facebook.com/share/19rnfkxEiF/"><i class="fab fa-facebook-f"></i></a>
                         <a class="text-primary px-3" href="https://www.instagram.com/visastramitesyasesoriabolivia?igsh=cnptODdmYnNoOGl4"><i class="fab fa-instagram"></i></a>
                         <a class="text-primary px-3" href="https://www.tiktok.com/@visas.tramites?_t=ZM-8tt05WArvG9&_r=1"><i class="fab fa-tiktok"></i></a>
-                        <div class="topbar-login d-inline-flex align-items-center">
-                            @if (Route::has('login'))
-                                @auth
-                                    <div class="dropdown">
-                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                            <i class="fas fa-user mr-2"></i>{{ Auth::user()->name }}
-                                        </a>
-                                        <div class="dropdown-menu">
-                                            <a href="{{ url('/home') }}" class="dropdown-item">Home</a>
-                                            <a href="{{ route('logout') }}" class="dropdown-item" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Cerrar Sesión</a>
-                                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                                @csrf
-                                            </form>
-                                        </div>
-                                    </div>
-                                @else
-                                    <a href="{{ route('login') }}" class="mr-3">Iniciar Sesión</a>
-                                @endauth
-                            @endif
-                        </div>
+                      
                     </div>
                 </div>
             </div>
@@ -100,6 +81,26 @@
                         <a href="{{ route('visa') }}" class="nav-item nav-link">VISA A BOLIVIA</a>
                         <a href="{{ url('/contact') }}" class="nav-item nav-link">CONTACTO</a>
                     </div>
+                      <div class="topbar-login d-inline-flex align-items-center">
+                            @if (Route::has('login'))
+                                @auth
+                                    <div class="dropdown">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                            <i class="fas fa-user mr-2"></i>{{ Auth::user()->name }}
+                                        </a>
+                                        <div class="dropdown-menu">
+                                            <a href="{{ url('/home') }}" class="dropdown-item">Home</a>
+                                            <a href="{{ route('logout') }}" class="dropdown-item" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Cerrar Sesión</a>
+                                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                                @csrf
+                                            </form>
+                                        </div>
+                                    </div>
+                                @else
+                                    <a href="{{ route('login') }}" class="mr-3">Iniciar Sesión</a>
+                                @endauth
+                            @endif
+                        </div>
                 </div>
             </nav>
         </div>
