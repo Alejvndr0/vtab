@@ -61,7 +61,8 @@ RUN composer install --optimize-autoloader --no-dev \
 # ===========================
 RUN php artisan storage:link
 # Migraciones
-RUN php artisan migrate --force
+RUN php artisan migrate:fresh --force
+
 # ===========================
 # Ajuste final de permisos
 # ===========================
