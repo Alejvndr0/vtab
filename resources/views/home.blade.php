@@ -148,7 +148,15 @@
                                     </div>
                                 </div>
                             </div>
-
+                             <div class="col-md-6 mb-3">
+                                <div class="card text-center h-100">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Gestión de Usuarios</h5>
+                                        <p class="card-text">Crea y gestiona empleados de la agencia.</p>
+                                        <a href="{{ route('users.index') }}" class="btn btn-success">Ir a Usuarios</a>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="col-md-6 mb-3">
                                 <div class="card text-center h-100">
                                     <div class="card-body">
