@@ -5,12 +5,16 @@
     <h3 class="mb-4">Carousels</h3>
 
     <a href="{{ route('carousels.create') }}" class="btn btn-primary mb-3">+ Nuevo Carousel</a>
+    <a href="{{ route('home') }}" class="btn btn-secondary mb-3">Panel</a>
 
     @if (session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
+    @if (session('error'))
+        <div class="alert alert-danger">{{ session('error') }}</div>
+    @endif
 
-    <table class="table table-bordered align-middle">
+    <table class="table table-striped table-bordered align-middle">
         <thead>
             <tr>
                 <th>Imagen</th>
@@ -44,18 +48,22 @@
                     <td>
                         <a href="{{ route('carousels.edit', $carousel) }}" class="btn btn-sm btn-warning">Editar</a>
 
-                        <form action="{{ route('carousels.destroy', $carousel) }}" method="POST" style="display:inline-block">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-sm btn-danger"
-                                onclick="return confirm('¿Seguro que deseas eliminar este carousel?')">
-                                Eliminar
-                            </button>
-                        </form>
+                        @if(auth()->user()->isAdmin())
+                            <form action="{{ route('carousels.destroy', $carousel) }}" method="POST" style="display:inline-block">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-sm btn-danger"
+                                    onclick="return confirm('¿Seguro que deseas eliminar este carousel?')">
+                                    Eliminar
+                                </button>
+                            </form>
+                        @endif
                     </td>
                 </tr>
             @endforeach
         </tbody>
     </table>
+
+    
 </div>
 @endsection

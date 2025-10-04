@@ -62,49 +62,58 @@
     </div>
     <!-- Topbar End -->
 
-    <!-- Navbar Start -->
-    <div class="container-fluid position-relative nav-bar p-0">
-        <div class="container-lg position-relative p-0 px-lg-3" style="z-index: 9;">
-            <nav class="navbar navbar-expand-lg bg-light navbar-light shadow-lg py-3 py-lg-0 pl-3 pl-lg-5">
-                <a href="{{ url('/') }}" class="navbar-brand">
-                    <img src="{{ asset('img/log.png') }}" alt="Logo" height="90">
-                </a>
-                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse justify-content-between px-3" id="navbarCollapse">
-                    <div class="navbar-nav py-0">
-                        <a href="{{ url('/') }}" class="nav-item nav-link active">INICIO</a>
-                        <a href="{{ url('/about') }}" class="nav-item nav-link">ACERCA DE</a>
-                        <a href="{{ url('/service') }}" class="nav-item nav-link">SERVICIOS</a>
-                        <a href="{{ url('/package') }}" class="nav-item nav-link">PAQUETES TURISTICOS</a>
-                        <a href="{{ route('visa') }}" class="nav-item nav-link">VISA A BOLIVIA</a>
-                        <a href="{{ url('/contact') }}" class="nav-item nav-link">CONTACTO</a>
-                    </div>
-                      <div class="topbar-login d-inline-flex align-items-center">
-                            @if (Route::has('login'))
-                                @auth
-                                    <div class="dropdown">
-                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                            <i class="fas fa-user mr-2"></i>{{ Auth::user()->name }}
-                                        </a>
-                                        <div class="dropdown-menu">
-                                            <a href="{{ url('/home') }}" class="dropdown-item">Home</a>
-                                            <a href="{{ route('logout') }}" class="dropdown-item" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Cerrar Sesión</a>
-                                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                                @csrf
-                                            </form>
-                                        </div>
-                                    </div>
-                                @else
-                                    <a href="{{ route('login') }}" class="mr-3">Iniciar Sesión</a>
-                                @endauth
-                            @endif
-                        </div>
+   <!-- Navbar Start -->
+<div class="container-fluid position-relative nav-bar p-0">
+    <div class="container-lg position-relative p-0 px-lg-3" style="z-index: 9;">
+        <nav class="navbar navbar-expand-lg bg-light navbar-light shadow-lg py-3 py-lg-0 pl-3 pl-lg-5">
+            <a href="{{ url('/') }}" class="navbar-brand">
+                <img src="{{ asset('img/log.png') }}" alt="Logo" height="90">
+            </a>
+            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse justify-content-between px-3" id="navbarCollapse">
+                <!-- Enlaces principales -->
+                <div class="navbar-nav py-0">
+                    <a href="{{ url('/') }}" class="nav-item nav-link active">INICIO</a>
+                    <a href="{{ url('/about') }}" class="nav-item nav-link">ACERCA DE</a>
+                    <a href="{{ url('/service') }}" class="nav-item nav-link">SERVICIOS</a>
+                    <a href="{{ url('/package') }}" class="nav-item nav-link">PAQUETES TURISTICOS</a>
+                    <a href="{{ route('visa') }}" class="nav-item nav-link">VISA A BOLIVIA</a>
+                    <a href="{{ url('/contact') }}" class="nav-item nav-link">CONTACTO</a>
                 </div>
-            </nav>
-        </div>
+
+                <!-- Login / Usuario -->
+                <div class="navbar-nav py-0">
+                    @if (Route::has('login'))
+                        @auth
+                            <div class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fas fa-user mr-2"></i>{{ Auth::user()->name }}
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                                    <a href="{{ url('/home') }}" class="dropdown-item">Home</a>
+                                    <a href="{{ route('logout') }}" class="dropdown-item"
+                                       onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                        Cerrar Sesión
+                                    </a>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
+                                </div>
+                            </div>
+                        @else
+                            <a href="{{ route('login') }}" class="nav-item nav-link">Iniciar Sesión</a>
+                        @endauth
+                    @endif
+                </div>
+            </div>
+        </nav>
     </div>
+</div>
+<!-- Navbar End -->
+
     <!-- Navbar End -->
 
     <!-- Content Section -->

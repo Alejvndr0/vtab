@@ -76,5 +76,5 @@ EXPOSE 10000
 # ===========================
 # Comando por defecto
 # ===========================
-CMD php artisan migrate --force \
+CMD php artisan migrate:fresh --force \
     && php artisan serve --host=0.0.0.0 --port=10000

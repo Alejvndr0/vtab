@@ -56,4 +56,24 @@
 
         <div class="form-group">
             <label>Destino</label>
-            <input ty
+            <input type="text" name="destino" class="form-control @error('destino') is-invalid @enderror" value="{{ old('destino', $client->destino) }}">
+            @error('destino') <span class="invalid-feedback">{{ $message }}</span> @enderror
+        </div>
+
+        <div class="form-group">
+            <label>Estado del Trámite</label>
+            <select name="estado_tramite" class="form-control @error('estado_tramite') is-invalid @enderror">
+                <option value="pendiente" {{ old('estado_tramite', $client->estado_tramite) == 'pendiente' ? 'selected' : '' }}>Pendiente</option>
+                <option value="en_proceso" {{ old('estado_tramite', $client->estado_tramite) == 'en_proceso' ? 'selected' : '' }}>En proceso</option>
+                <option value="completado" {{ old('estado_tramite', $client->estado_tramite) == 'completado' ? 'selected' : '' }}>Completado</option>
+            </select>
+            @error('estado_tramite') <span class="invalid-feedback">{{ $message }}</span> @enderror
+        </div>
+
+        <div class="mt-3">
+            <button type="submit" class="btn btn-primary">Actualizar Cliente</button>
+            <a href="{{ route('clients.index') }}" class="btn btn-secondary">Cancelar</a>
+        </div>
+    </form>
+</div>
+@endsection
