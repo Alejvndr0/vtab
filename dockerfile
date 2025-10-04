@@ -60,7 +60,8 @@ RUN composer install --optimize-autoloader --no-dev \
 # Crear enlace simbólico storage
 # ===========================
 RUN php artisan storage:link
-
+# Migraciones
+RUN php artisan migrate --force
 # ===========================
 # Ajuste final de permisos
 # ===========================
