@@ -1,0 +1,41 @@
+// Fonts
+@import url('https://fonts.bunny.net/css?family=Nunito');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import 'bootstrap/scss/bootstrap';
+// Bootstrap Import
+
+
+// Custom Styles
+body {
+    background-color: #f8f9fa;
+}
+
+.card {
+    border-radius: 10px;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+    &:hover {
+        background-color: #0056b3;
+        border-color: #0056b3;
+    }
+}
+
+.input-group-text {
+    background-color: #f1f3f5;
+    border-right: 0;
+}
+
+.form-control {
+    border-left: 0;
+    &:focus {
+        box-shadow: none;
+        border-color: #007bff;
+    }
+}

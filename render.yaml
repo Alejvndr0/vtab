@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: Laravel
+    env: docker
+    dockerfilePath: ./Dockerfile
+    envVars:
+      - key: APP_KEY
+        value: base64:jH8yPSAy51+r8RsMovIEfdJseqEImvH4vjJ0XKNT8ao=
+      - key: APP_ENV
+        value: production
+      - key: APP_DEBUG
+        value: true
+      - key: DB_CONNECTION
+        value: pgsql
+      - key: DB_HOST
+        value: dpg-cv8pk29u0jms739dqo2g-a
+      - key: DB_PORT
+        value: 5432
+      - key: DB_DATABASE
+        value: visa_75ki
+      - key: DB_USERNAME
+        value: visa_75ki_user
+      - key: DB_PASSWORD
+        value: sZISmFF04ve8oDe8opuaXaBAnGMQ0PNy
